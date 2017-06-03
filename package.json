@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start-s": "supervisor --harmony ./server/app.js",
+    "start-cs": "supervisor --harmony ./client-server/app.js"
   },
   "repository": {
     "type": "git",
