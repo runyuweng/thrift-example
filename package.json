@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start-s": "supervisor --harmony ./server/app.js",
+    "start-s": "supervisor --harmony ./server/thrift/index.js",
     "start-cs": "supervisor --harmony ./client-server/app.js"
   },
   "repository": {
@@ -23,6 +23,7 @@
     "koa-router": "^7.2.0"
   },
   "devDependencies": {
-    "koa-cors": "0.0.16"
+    "koa-cors": "0.0.16",
+    "thrift": "^0.10.0"
   }
 }

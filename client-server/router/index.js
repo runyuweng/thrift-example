@@ -1,5 +1,5 @@
 const router = require('koa-router')();
-const excuate = require('../thrift/index')
+const excuate = require('../thrift/index');
 
 router.get('/', async (ctx, next) => {
 	console.log(123);
