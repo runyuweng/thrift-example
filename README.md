@@ -3,13 +3,13 @@ This demo is used to help someone who is interested in thrift to get started wit
 
 You can think of it as a simple tutorial.
 # Basic architecture
-![](./img/thrift.png)
+![](./thrift.png)
 # Main file structure
 ```
 -|
  |- client               // 前端 （ Front end ）
  |                          
- |- client-server        // 中间层  （ Middle layer ）
+ |- middle               // 中间层  （ Middle layer ）
  |  
  |- server               // 真正的后端  （ Real backend ）
 
@@ -19,8 +19,14 @@ You can think of it as a simple tutorial.
   and then may be simplified so that we better understand.
 
 ```
+
+Front end frames or library will be used:
+- client : vue ( Just want to have a try... )
+- middle : koa ( Because it's a very lightweight Library )
+- server : koa ( Normally, Java or some other back-end language should be used, but for convenience, use KOA... )
+
 # How to run
-- Firstly you should run the server by `npm run start-s`;
-- Secondly you should run the node middle server by `npm run start-cs`;
+- Firstly you should run the server by `npm run server`;
+- Secondly you should run the node middle server by `npm run middle`;
 - Lastly you can `cd client` and then `npm start`
 - When you trigger event in client, you'll see the log in server terminal.
