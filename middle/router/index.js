@@ -2,7 +2,14 @@ const router = require('koa-router')();
 const excuate = require('../thrift/index');
 
 router.get('/', async (ctx, next) => {
-	console.log(123);
+  return ctx.body = {
+      code: 'S01',
+      msg: 'success'
+  };
+});
+
+router.post('login', async (ctx, next) => {
+  console.log('login...',ctx.request.body)
   return ctx.body = {
       code: 'S01',
       msg: 'success'
