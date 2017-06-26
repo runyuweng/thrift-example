@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "middle": "supervisor --harmony ./middle/app.js",
-    "server": "supervisor --harmony ./server/app.js"
+    "middle": "node --harmony ./middle/app.js",
+    "server": "node --harmony ./server/app.js"
   },
   "repository": {
     "type": "git",

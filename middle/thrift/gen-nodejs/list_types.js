@@ -11,20 +11,20 @@ var Q = thrift.Q;
 
 
 var ttypes = module.exports = {};
-var SharedStruct = module.exports.SharedStruct = function(args) {
-  this.key = null;
-  this.value = null;
+var Data = module.exports.Data = function(args) {
+  this.code = null;
+  this.msg = null;
   if (args) {
-    if (args.key !== undefined && args.key !== null) {
-      this.key = args.key;
+    if (args.code !== undefined && args.code !== null) {
+      this.code = args.code;
     }
-    if (args.value !== undefined && args.value !== null) {
-      this.value = args.value;
+    if (args.msg !== undefined && args.msg !== null) {
+      this.msg = args.msg;
     }
   }
 };
-SharedStruct.prototype = {};
-SharedStruct.prototype.read = function(input) {
+Data.prototype = {};
+Data.prototype.read = function(input) {
   input.readStructBegin();
   while (true)
   {
@@ -38,15 +38,15 @@ SharedStruct.prototype.read = function(input) {
     switch (fid)
     {
       case 1:
-      if (ftype == Thrift.Type.I32) {
-        this.key = input.readI32();
+      if (ftype == Thrift.Type.STRING) {
+        this.code = input.readString();
       } else {
         input.skip(ftype);
       }
       break;
       case 2:
       if (ftype == Thrift.Type.STRING) {
-        this.value = input.readString();
+        this.msg = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -60,16 +60,16 @@ SharedStruct.prototype.read = function(input) {
   return;
 };
 
-SharedStruct.prototype.write = function(output) {
-  output.writeStructBegin('SharedStruct');
-  if (this.key !== null && this.key !== undefined) {
-    output.writeFieldBegin('key', Thrift.Type.I32, 1);
-    output.writeI32(this.key);
+Data.prototype.write = function(output) {
+  output.writeStructBegin('Data');
+  if (this.code !== null && this.code !== undefined) {
+    output.writeFieldBegin('code', Thrift.Type.STRING, 1);
+    output.writeString(this.code);
     output.writeFieldEnd();
   }
-  if (this.value !== null && this.value !== undefined) {
-    output.writeFieldBegin('value', Thrift.Type.STRING, 2);
-    output.writeString(this.value);
+  if (this.msg !== null && this.msg !== undefined) {
+    output.writeFieldBegin('msg', Thrift.Type.STRING, 2);
+    output.writeString(this.msg);
     output.writeFieldEnd();
   }
   output.writeFieldStop();

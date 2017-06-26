@@ -1,5 +1,5 @@
 # Thrift demo
-This demo is used to help someone who is interested in thrift to get started with it.
+This demo is used to help FE who is interested in thrift to get started with it.
 
 You can think of it as a simple tutorial.
 # Basic architecture
