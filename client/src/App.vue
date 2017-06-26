@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h1>Thrift</h1>
     <div>
       <input type="text" placeholder="username" v-model="username" />
       <input type="text" placeholder="words" v-model="words" />
@@ -65,9 +65,10 @@ export default {
   margin-top: 60px;
 }
 
-h1,
-h2 {
-  font-weight: normal;
+h1{
+  font-size: 50px;
+  color: #41B883;
+  font-weight: bolder;
 }
 input,
 button {

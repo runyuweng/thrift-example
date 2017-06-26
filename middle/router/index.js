@@ -18,7 +18,7 @@ router.post('/', async (ctx, next) => {
   });
 
   // thrift文件中定义的save方法
-  client.save(ctx.request.body.username, ctx.request.body.username, ctx.request.body.username, function(err, response) {
+  client.save(ctx.request.body.username, ctx.request.body.words, Date.parse(new Date()), function(err, response) {
     console.log("res:",response);
   });
 
