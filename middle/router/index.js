@@ -4,7 +4,7 @@ const SaveList = require('../../thrift/gen-nodejs/SaveList');
 const ttypes = require('../../thrift/gen-nodejs/list_types');
 const createConnection = require('../utils/createConnection').createConnection;
 
-router.post('login', async (ctx, next) => {
+router.post('/', async (ctx, next) => {
 
   // 因为复用度高，把创建connection的代码提取成一个方法
   const connection = createConnection();

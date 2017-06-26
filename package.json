@@ -21,8 +21,7 @@
     "koa": "^2.2.0",
     "koa-body": "^2.3.0",
     "koa-router": "^7.2.0",
-    "vue": "^2.3.3",
-    "vue-router": "^2.3.1"
+    "vue": "^2.3.3"
   },
   "devDependencies": {
     "koa-cors": "0.0.16",
