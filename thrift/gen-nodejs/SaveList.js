@@ -71,14 +71,14 @@ SaveList_ping_result.prototype.write = function(output) {
 
 var SaveList_save_args = function(args) {
   this.name = null;
-  this.content = null;
+  this.words = null;
   this.date = null;
   if (args) {
     if (args.name !== undefined && args.name !== null) {
       this.name = args.name;
     }
-    if (args.content !== undefined && args.content !== null) {
-      this.content = args.content;
+    if (args.words !== undefined && args.words !== null) {
+      this.words = args.words;
     }
     if (args.date !== undefined && args.date !== null) {
       this.date = args.date;
@@ -108,7 +108,7 @@ SaveList_save_args.prototype.read = function(input) {
       break;
       case 2:
       if (ftype == Thrift.Type.STRING) {
-        this.content = input.readString();
+        this.words = input.readString();
       } else {
         input.skip(ftype);
       }
@@ -136,9 +136,9 @@ SaveList_save_args.prototype.write = function(output) {
     output.writeString(this.name);
     output.writeFieldEnd();
   }
-  if (this.content !== null && this.content !== undefined) {
-    output.writeFieldBegin('content', Thrift.Type.STRING, 2);
-    output.writeString(this.content);
+  if (this.words !== null && this.words !== undefined) {
+    output.writeFieldBegin('words', Thrift.Type.STRING, 2);
+    output.writeString(this.words);
     output.writeFieldEnd();
   }
   if (this.date !== null && this.date !== undefined) {
@@ -257,7 +257,7 @@ SaveListClient.prototype.recv_ping = function(input,mtype,rseqid) {
 
   callback(null);
 };
-SaveListClient.prototype.save = function(name, content, date, callback) {
+SaveListClient.prototype.save = function(name, words, date, callback) {
   this._seqid = this.new_seqid();
   if (callback === undefined) {
     var _defer = Q.defer();
@@ -268,20 +268,20 @@ SaveListClient.prototype.save = function(name, content, date, callback) {
         _defer.resolve(result);
       }
     };
-    this.send_save(name, content, date);
+    this.send_save(name, words, date);
     return _defer.promise;
   } else {
     this._reqs[this.seqid()] = callback;
-    this.send_save(name, content, date);
+    this.send_save(name, words, date);
   }
 };
 
-SaveListClient.prototype.send_save = function(name, content, date) {
+SaveListClient.prototype.send_save = function(name, words, date) {
   var output = new this.pClass(this.output);
   output.writeMessageBegin('save', Thrift.MessageType.CALL, this.seqid());
   var args = new SaveList_save_args();
   args.name = name;
-  args.content = content;
+  args.words = words;
   args.date = date;
   args.write(output);
   output.writeMessageEnd();
@@ -366,7 +366,7 @@ SaveListProcessor.prototype.process_save = function(seqid, input, output) {
   args.read(input);
   input.readMessageEnd();
   if (this._handler.save.length === 3) {
-    Q.fcall(this._handler.save, args.name, args.content, args.date)
+    Q.fcall(this._handler.save, args.name, args.words, args.date)
       .then(function(result) {
         var result_obj = new SaveList_save_result({success: result});
         output.writeMessageBegin("save", Thrift.MessageType.REPLY, seqid);
@@ -382,7 +382,7 @@ SaveListProcessor.prototype.process_save = function(seqid, input, output) {
         output.flush();
       });
   } else {
-    this._handler.save(args.name, args.content, args.date, function (err, result) {
+    this._handler.save(args.name, args.words, args.date, function (err, result) {
       var result_obj;
       if ((err === null || typeof err === 'undefined')) {
         result_obj = new SaveList_save_result((err !== null || typeof err === 'undefined') ? err : {success: result});

@@ -6,18 +6,12 @@
       <input type="text" placeholder="words" v-model="words" />
       <button v-on:click="submit">提交</button>
     </div>
-    <div class="list">
+    <div class="list" v-for="item in list">
       <div>
-        <p>words: keep coding</p>
-        <p>name: wry</p>
-        <p>status: success</p>
-        <p>date: 2017.09.21</p>
-      </div>
-      <div>
-        <p>words: keep coding</p>
-        <p>name: wry</p>
-        <p>status: success</p>
-        <p>date: 2017.09.21</p>
+        <p>words: {{item.words}}</p>
+        <p>name: {{item.name}}</p>
+        <p>status: {{item.status}}</p>
+        <p>date: {{item.date}}</p>
       </div>
     </div>
   </div>
@@ -29,7 +23,21 @@ export default {
   data() {
     return {
       username: '',
-      words: ''
+      words: '',
+      list: [
+        {
+          words:'keep codin12dsacg',
+          name: 'wry',
+          status: 'success',
+          date: '2017.09.21'
+        },
+        {
+          words:'keep coding',
+          name: 'wry',
+          status: 'success',
+          date: '2017.09.21'
+        }
+      ]
     }
   },
   methods: {
@@ -48,7 +56,7 @@ export default {
         })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data);
+          this.list = data.list
         })
     }
   }

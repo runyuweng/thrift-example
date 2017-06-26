@@ -13,20 +13,20 @@ router.post('/', async (ctx, next) => {
   var client = thrift.createClient(SaveList, connection);
 
   // thrift文件中定义的ping方法
-  client.ping(function(err, response) {
+  await client.ping(function(err, response) {
     console.log('ping in middle...................');
   });
 
+  const date = Date.parse(new Date());
+
   // thrift文件中定义的save方法
-  client.save(ctx.request.body.username, ctx.request.body.words, Date.parse(new Date()), function(err, response) {
+  await client.save(ctx.request.body.username, ctx.request.body.words, String(date), function(err, response) {
     console.log("res:",response);
+    ctx.body = response;
   });
 
   // 返回给前端的参数
-  return ctx.body = {
-      code: 'S01',
-      msg: 'success'
-  };
+  return ctx.body;
 });
 
 module.exports = router;

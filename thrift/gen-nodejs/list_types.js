@@ -14,12 +14,16 @@ var ttypes = module.exports = {};
 var Data = module.exports.Data = function(args) {
   this.code = null;
   this.msg = null;
+  this.content = null;
   if (args) {
     if (args.code !== undefined && args.code !== null) {
       this.code = args.code;
     }
     if (args.msg !== undefined && args.msg !== null) {
       this.msg = args.msg;
+    }
+    if (args.content !== undefined && args.content !== null) {
+      this.content = Thrift.copyList(args.content, [null]);
     }
   }
 };
@@ -51,6 +55,27 @@ Data.prototype.read = function(input) {
         input.skip(ftype);
       }
       break;
+      case 3:
+      if (ftype == Thrift.Type.LIST) {
+        var _size0 = 0;
+        var _rtmp34;
+        this.content = [];
+        var _etype3 = 0;
+        _rtmp34 = input.readListBegin();
+        _etype3 = _rtmp34.etype;
+        _size0 = _rtmp34.size;
+        for (var _i5 = 0; _i5 < _size0; ++_i5)
+        {
+          var elem6 = null;
+          elem6 = new ttypes.List_Item();
+          elem6.read(input);
+          this.content.push(elem6);
+        }
+        input.readListEnd();
+      } else {
+        input.skip(ftype);
+      }
+      break;
       default:
         input.skip(ftype);
     }
@@ -70,6 +95,102 @@ Data.prototype.write = function(output) {
   if (this.msg !== null && this.msg !== undefined) {
     output.writeFieldBegin('msg', Thrift.Type.STRING, 2);
     output.writeString(this.msg);
+    output.writeFieldEnd();
+  }
+  if (this.content !== null && this.content !== undefined) {
+    output.writeFieldBegin('content', Thrift.Type.LIST, 3);
+    output.writeListBegin(Thrift.Type.STRUCT, this.content.length);
+    for (var iter7 in this.content)
+    {
+      if (this.content.hasOwnProperty(iter7))
+      {
+        iter7 = this.content[iter7];
+        iter7.write(output);
+      }
+    }
+    output.writeListEnd();
+    output.writeFieldEnd();
+  }
+  output.writeFieldStop();
+  output.writeStructEnd();
+  return;
+};
+
+var List_Item = module.exports.List_Item = function(args) {
+  this.name = null;
+  this.words = null;
+  this.date = null;
+  if (args) {
+    if (args.name !== undefined && args.name !== null) {
+      this.name = args.name;
+    }
+    if (args.words !== undefined && args.words !== null) {
+      this.words = args.words;
+    }
+    if (args.date !== undefined && args.date !== null) {
+      this.date = args.date;
+    }
+  }
+};
+List_Item.prototype = {};
+List_Item.prototype.read = function(input) {
+  input.readStructBegin();
+  while (true)
+  {
+    var ret = input.readFieldBegin();
+    var fname = ret.fname;
+    var ftype = ret.ftype;
+    var fid = ret.fid;
+    if (ftype == Thrift.Type.STOP) {
+      break;
+    }
+    switch (fid)
+    {
+      case 1:
+      if (ftype == Thrift.Type.STRING) {
+        this.name = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 2:
+      if (ftype == Thrift.Type.STRING) {
+        this.words = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      case 3:
+      if (ftype == Thrift.Type.STRING) {
+        this.date = input.readString();
+      } else {
+        input.skip(ftype);
+      }
+      break;
+      default:
+        input.skip(ftype);
+    }
+    input.readFieldEnd();
+  }
+  input.readStructEnd();
+  return;
+};
+
+List_Item.prototype.write = function(output) {
+  output.writeStructBegin('List_Item');
+  if (this.name !== null && this.name !== undefined) {
+    output.writeFieldBegin('name', Thrift.Type.STRING, 1);
+    output.writeString(this.name);
+    output.writeFieldEnd();
+  }
+  if (this.words !== null && this.words !== undefined) {
+    output.writeFieldBegin('words', Thrift.Type.STRING, 2);
+    output.writeString(this.words);
+    output.writeFieldEnd();
+  }
+  if (this.date !== null && this.date !== undefined) {
+    output.writeFieldBegin('date', Thrift.Type.STRING, 3);
+    output.writeString(this.date);
     output.writeFieldEnd();
   }
   output.writeFieldStop();
