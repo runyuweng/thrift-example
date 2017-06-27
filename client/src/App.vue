@@ -10,8 +10,8 @@
       <div>
         <p>words: {{item.words}}</p>
         <p>name: {{item.name}}</p>
-        <p>status: {{item.status}}</p>
-        <p>date: {{item.date}}</p>
+        <p>status: success</p>
+        <p>date: {{String(new Date(parseInt(item.date)))}}</p>
       </div>
     </div>
   </div>
@@ -24,20 +24,7 @@ export default {
     return {
       username: '',
       words: '',
-      list: [
-        {
-          words:'keep codin12dsacg',
-          name: 'wry',
-          status: 'success',
-          date: '2017.09.21'
-        },
-        {
-          words:'keep coding',
-          name: 'wry',
-          status: 'success',
-          date: '2017.09.21'
-        }
-      ]
+      list: []
     }
   },
   methods: {
@@ -56,7 +43,8 @@ export default {
         })
         .then((res) => res.json())
         .then((data) => {
-          this.list = data.list
+          console.log(data);
+          this.list = data.content
         })
     }
   }

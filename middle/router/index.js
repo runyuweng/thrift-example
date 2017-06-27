@@ -14,16 +14,22 @@ router.post('/', async (ctx, next) => {
 
   // thrift文件中定义的ping方法
   await client.ping(function(err, response) {
-    console.log('ping in middle...................');
+    console.log('ping in middle\n');
   });
 
   const date = Date.parse(new Date());
 
   // thrift文件中定义的save方法
-  await client.save(ctx.request.body.username, ctx.request.body.words, String(date), function(err, response) {
-    console.log("res:",response);
-    ctx.body = response;
-  });
+  // async与promise同时使用，等待回调函数执行完后返回response
+  function save(){
+    return new Promise((resolve, reject) => {
+      client.save(ctx.request.body.username, ctx.request.body.words, String(date), function(err, response) {
+        console.log("res:",response);
+        resolve(response)
+      });
+    })
+  }
+  ctx.body = await save();
 
   // 返回给前端的参数
   return ctx.body;

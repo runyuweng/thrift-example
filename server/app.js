@@ -8,7 +8,7 @@ var list = [];
 
 var server = thrift.createServer(SaveList, {
   ping: function(result) {
-    console.log("ping in server...................");
+    console.log("ping in server\n");
     result(null);
   },
 
