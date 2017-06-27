@@ -1,5 +1,6 @@
+![](./thrift_logo.png)
 # Thrift上手
-[英文 README](http://example.net/)  
+[README in English](https://github.com/wengwengweng/thrift-demo/blob/master/README.md)  
 
 这个项目用来帮助那些对thrift感兴趣的前端们上手thrift，  
 你可以把它认为是一个简易的使用案例或是指南，  
@@ -28,7 +29,7 @@
 将会被用到的前端框架或前端库:
 - 客户端 : vue ( 尝试一下而已，但是使用vue-cli构建项目真的很方便，对vue不熟悉的渎职只需关注 @client/src/App.vue 中的代码即可 )
 - 中间层 : koa ( 因为它是一个真的很轻量的nodejs库，作为demo真的是再适合不过了 )
-- 服务端 : thrift ( 通常的，这里会使用java等一些稳定高效的后端语言，但是为了方便前端们的阅读也为了方便期间，这里还是使用node )
+- 服务端 : thrift ( 通常的，这里会使用java等一些稳定高效的后端语言，但是为了方便前端们的阅读也为了方便编写，这里还是使用node )
 
 # 如何使用
 - 首先你需要通过 `npm run server` 启动服务端的服务；

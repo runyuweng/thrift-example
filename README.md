@@ -1,5 +1,5 @@
 # Thrift tutorial
-[中文 README](http://example.net/)  
+[中文 README](https://github.com/wengwengweng/thrift-demo/blob/master/README-zh_CN.md)  
 
 This demo is used to help FE who is interested in thrift to get started with it.  
 You can think of it as a simple tutorial.
